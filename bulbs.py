@@ -1,3 +1,5 @@
+# 2011 southeast us 5776
+
 string = "1 (3 (5)*3 2)*2 7"
 
 timing_list = []
