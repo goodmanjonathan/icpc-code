@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Some code for calculating volume of a shape revolving around an axis.
+# Chris's code for calculating volume of a shape revolving around an axis.
 
 def squarePoly(coList):
     prod = []
