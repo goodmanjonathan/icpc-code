@@ -19,7 +19,7 @@ def check_bisect(wall_axis, wall_loc, region):
 
     return abs(after_count - before_count) <= 1
 
-# returns number of walls needed
+# returns number of walls needed for a region
 def place_walls(region):
     if len(region) <= 3:
         return len(region) - 1
