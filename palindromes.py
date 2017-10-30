@@ -7,10 +7,27 @@ def is_palindrome(num):
     return True
 
 def find_greater_palindrome(num):
-    while True:
-        if is_palindrome(num):
-            return num
-        num += 1
+    if is_palindrome(num):
+        return num
+    #print(num)
+
+    numstr = str(num)
+    if len(numstr) % 2 == 0:
+        left = numstr[:int(len(numstr) / 2)]
+        mid = ''
+        right = numstr[int(len(numstr) / 2):]
+    else:
+        left = numstr[:int(len(numstr) / 2)]
+        mid = numstr[int(len(numstr) / 2)]
+        right = numstr[int(len(numstr) / 2) + 1:]
+        
+    #print(left, mid, right)
+
+    if int(right[::-1]) > int(left):
+        left = str(int(left) + 1)
+    right = int(str(left)[::-1])
+
+    return str(left) + str(mid) + str(right)
 
 num_of_inputs = int(input())
 
