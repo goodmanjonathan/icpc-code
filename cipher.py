@@ -1,20 +1,44 @@
+#!/usr/bin/env python3
+
+# ICPC South Central USA 2014 #6793
+
 punct_ords = [(33, 48), (58, 65), (91, 97), (123, 127)]
 
-punctuation = []
+punctuation = ''
 for tup in punct_ords:
     for i in range(tup[0], tup[1]):
-        punctuation.append(chr(i))
+        punctuation += chr(i)
 
 def find_rotation(ciphertext, threat_list, nonthreat_list):
+    max_score = {'rot': 0,
+                 'score': 0,
+                 'info': None}
     for shift in range(26):
         decipher_text = decipher(ciphertext, shift)
-        matched_words = 
+        results = match_words(decipher_text, threat_list, nonthreat_list)
+        score = results['threats'] + results['nonthreats']
+        if score > max_score['score']:
+            max_score['rot'] = shift
+            max_score['score'] = score
+            max_score['info'] = results
 
-def match_words(text, threat_list):
+    return max_score
+
+def match_words(text, threat_list, nonthreat_list):
+    threats = 0
+    nonthreats = 0
+    words = 0
     for word in text.split(' '):
-        if not word.isalpha():
-            word = word[:-1] # get rid of punctuation, hopefully
-        
+        word = word.strip(punctuation).lower()
+        words += 1
+        if word in threat_list:
+            threats += 1
+        if word in nonthreat_list:
+            nonthreats += 1
+
+    return {'threats': threats,
+            'nonthreats': nonthreats,
+            'words': words}
 
 def decipher(ciphertext, shift):
     deciphered_str = ''
@@ -40,3 +64,16 @@ def handle_testcase():
         threat_list.append(input())
 
     ciphertext = input()
+
+    result = find_rotation(ciphertext, threat_list, nonthreat_list)
+
+    match_percent = int(result['score'] / result['info']['words'] * 100)
+    threat_percent = int(result['info']['threats'] / result['info']['words'] * 100)
+    print(decipher(ciphertext, result['rot']))
+    print('Shift: {}, Match: {}%, Threat: {}%'.format(result['rot'],
+                                                       match_percent,
+                                                       threat_percent))
+
+test_cases = int(input())
+for _ in range(test_cases):
+    handle_testcase()
