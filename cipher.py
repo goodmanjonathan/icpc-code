@@ -9,12 +9,6 @@ for tup in punct_ords:
     for i in range(tup[0], tup[1]):
         punctuation += chr(i)
 
-contractions = {
-    "it's": "it is",
-    "don't": "do not",
-    "isn't": "is not"
-}
-
 def find_rotation(ciphertext, threat_list, nonthreat_list):
     max_score = {'rot': 0,
                  'score': 0,
