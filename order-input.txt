@@ -1,0 +1,7 @@
+3
+abba
+aabb
+caxcab
+cacxab
+a
+z
